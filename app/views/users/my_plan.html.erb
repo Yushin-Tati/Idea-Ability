@@ -1,0 +1,12 @@
+<h1>Users#my_plan</h1>
+<% @user.plans.each do |plan| %>
+  <div>
+    <%= plan.title %>
+    <%= plan.text %>
+    <%= plan.status %>
+    <% if plan.user_id == current_user.id %>
+      <%= link_to "編集する", edit_plan_path(plan) %>
+      <%= link_to "削除する", plan_path(plan), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<h1>Plans#index</h1>
+<% @plans.each do |plan| %>
+  <div>
+    <%= link_to plan_path(plan) do %>
+      <%= plan.title %>
+    <% end %>
+    <%= plan.text %>
+    <%= plan.status %>
+  </div>
+<% end %>
+
+<%= link_to "新しいIdeaを投稿する", new_plan_path %>

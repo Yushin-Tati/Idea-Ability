@@ -1,0 +1,21 @@
+<h1>Users#show</h1>
+<%= @user.name %>
+<%= @user.introduction %>
+
+<% if @user.id == current_user.id %>
+  <%= link_to "プロフィール編集", edit_user_path(current_user) %>
+<% end %>
+
+<%= link_to "My Idea", my_plan_path(@user) %>
+
+<!-- フォロー関連 -->
+<%= @user.follow_count %>
+<%= link_to "フォロー", {controller: :users,action: :follow_list,user_id: @user.id}, method: :get %>
+
+<%= @user.followers_count %>
+<%= link_to "フォロワー", {controller: :users,action: :follower_list,user_id: @user.id}, method: :get %>
+
+<% if current_user.id != @user.id %>
+  <%= render 'follow_form' %>
+<% end %>
+

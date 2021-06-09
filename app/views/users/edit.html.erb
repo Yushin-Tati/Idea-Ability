@@ -1,0 +1,31 @@
+<h1>Users#edit</h1>
+<div class="notice"><%= flash[:alart] %></div>
+<% if @user.errors.any? %>
+  <ui>
+    <% @user.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ui>
+<% end %>
+  
+<%= form_with model: @user, local: true do |f| %>
+  <div class = "field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class = "field">
+    <%= f.label :introduction %>
+    <%= f.text_area :introduction %>
+  </div>
+  
+  <div class = "field">
+    <%= f.label :telephone_number %>
+    <%= f.text_field :telephone_number %>
+    <p>ハイフンなしで入力</p>
+  </div>
+  
+  <div class = "action">
+    <%= f.submit "更新" %>
+  </div>
+<% end %>

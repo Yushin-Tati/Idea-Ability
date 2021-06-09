@@ -1,0 +1,16 @@
+<h1>Plans#show</h1>
+<div>
+  <%= link_to user_path(@plan.user.id) do %>
+    <%= @plan.user.name %>
+  <% end %>
+</div>
+<div>
+  <%= @plan.title %>
+  <%= @plan.text %>
+  <%= @plan.status %>
+</div>
+
+<% if @plan.user_id == current_user.id %>
+  <%= link_to "編集する", edit_plan_path(@plan) %>
+  <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+<% end %>

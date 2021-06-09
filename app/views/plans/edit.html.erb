@@ -1,0 +1,26 @@
+<h1>Plans#edit</h1>
+<div class="notice"><%= flash[:alart] %></div>
+<% if @plan.errors.any? %>
+  <ui>
+    <% @plan.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ui>
+<% end %>
+
+<%= form_with model: @plan, local: true do |f| %>
+  <div class = "field">
+    <%= f.label :title %>
+    <%= f.text_field :title %><span>※</span>
+  </div>
+  
+  <div class = "field">
+    <%= f.label :text %>
+    <%= f.text_area :text %><span>※</span>
+  </div>
+  
+  <div class = "action">
+    <%= f.submit "更新する" %>
+    <p>※は必須項目です</p>
+  </div>
+<% end %>
