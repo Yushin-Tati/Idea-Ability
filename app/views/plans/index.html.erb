@@ -6,6 +6,7 @@
     <% end %>
     <%= plan.text %>
     <%= plan.status %>
+    <%= link_to "コメント", comments_path(target_type: "Plan", target_id: plan.id) %>
   </div>
 <% end %>
 

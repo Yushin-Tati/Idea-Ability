@@ -1,0 +1,23 @@
+<h1>Comment#new</h1>
+<div class="notice"><%= flash[:danger] %></div>
+<% if @comment.errors.any? %>
+  <ui>
+    <% @comment.errors.full_messages.each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ui>
+<% end %>
+
+<div>
+  <%= form_with model: @comment, local: true do |f| %>
+    <div class = "field">
+      <%= f.label :text %>
+      <%= f.text_area :text %>
+    </div>
+    <div class = "action">
+      <%= f.hidden_field :target_type, :value => @target_type %>
+      <%= f.hidden_field :target_id, :value => @target_id %>
+      <%= f.submit "コメントする" %>
+    </div>
+  <% end %>  
+</div>

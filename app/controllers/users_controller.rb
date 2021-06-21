@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+   before_action :autheniticate_user
+   
   def index
     @users = User.all
   end
@@ -22,7 +24,15 @@ class UsersController < ApplicationController
   end
 
   def my_plan
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
+  end
+  
+  def my_ability
+    @user = User.find(params[:id])
+  end
+  
+  def my_product
+    @user = User.find(params[:id])
   end
 
   def follow

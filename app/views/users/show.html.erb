@@ -6,14 +6,24 @@
   <%= link_to "プロフィール編集", edit_user_path(current_user) %>
 <% end %>
 
-<%= link_to "My Idea", my_plan_path(@user) %>
+<div>
+  <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
+</div>
+<div>
+  <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
+</div>
+<div>
+  <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
+</div>
+
+
 
 <!-- フォロー関連 -->
 <%= @user.follow_count %>
-<%= link_to "フォロー", {controller: :users,action: :follow_list,user_id: @user.id}, method: :get %>
+<%= link_to "フォロー", {controller: :users, action: :follow_list, user_id: @user.id} %>
 
 <%= @user.followers_count %>
-<%= link_to "フォロワー", {controller: :users,action: :follower_list,user_id: @user.id}, method: :get %>
+<%= link_to "フォロワー", {controller: :users, action: :follower_list, user_id: @user.id} %>
 
 <% if current_user.id != @user.id %>
   <%= render 'follow_form' %>

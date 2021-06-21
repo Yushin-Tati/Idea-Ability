@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_132014) do
+ActiveRecord::Schema.define(version: 2021_06_13_084942) do
+
+  create_table "abilities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "text", null: false
+    t.string "image_id"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "target_type", null: false
+    t.integer "target_id", null: false
+    t.integer "user_id", null: false
+    t.text "text", null: false
+    t.boolean "is_active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_type", "target_id"], name: "index_comments_on_target_type_and_target_id"
+  end
 
   create_table "follows", force: :cascade do |t|
     t.string "followable_type", null: false
@@ -33,6 +54,16 @@ ActiveRecord::Schema.define(version: 2021_06_09_132014) do
     t.string "image_id"
     t.integer "status", default: 0, null: false
     t.boolean "is_active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "text", null: false
+    t.string "image_id"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

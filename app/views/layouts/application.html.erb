@@ -4,6 +4,7 @@
     <title>Idea</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,21 +12,43 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-      <li>
-        <%= link_to "My page", user_path(current_user) %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to "Idea&Ability", root_path, class: "navbar-brand" %>
+        <ul class="nav navbar-nav mr-auto"></ul>
+        <ul class="nav navbar-nav">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </ul>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 text-left">
+            <%= link_to "Idea & Ability", root_path %>
+          </div>
+          <div class="col-lg-4 text-center"></div>
+          <div class="col-lg-4">
+            <ul class="nav nav-pills">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <% if user_signed_in? %>
+                    <%= link_to "My page", user_path(current_user), class: "dropdown-item" %>
+                    <%= link_to "Idea", plans_path, class: "dropdown-item" %>
+                    <%= link_to "Product", products_path, class: "dropdown-item" %>
+                    <%= link_to "Ability", abilities_path, class: "dropdown-item" %>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                  <% else %>
+                    <%= link_to "新規登録", new_user_registration_path, class: "dropdown-item" %>
+                    <%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %>
+                  <% end %>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </header>
     <main>
       <%= yield %>

@@ -1,0 +1,12 @@
+<h1>Users#my_ability</h1>
+<% @user.abilities.each do |ability| %>
+  <div>
+    <%= ability.title %>
+    <%= ability.text %>
+    <%= ability.status %>
+    <% if ability.user_id == current_user.id %>
+      <%= link_to "編集する", edit_ability_path(ability) %>
+      <%= link_to "削除する", ability_path(ability), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+    <% end %>
+  </div>
+<% end %>

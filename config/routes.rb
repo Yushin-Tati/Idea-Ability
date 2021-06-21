@@ -8,9 +8,16 @@ Rails.application.routes.draw do
   put 'users/unfollow/:user_id' => 'users#unfollow'
   get 'users/follow_list/:user_id' => 'users#follow_list'
   get 'users/follower_list/:user_id' => 'users#follower_list'
-  get 'users/my_Idea/:user_id' => 'users#my_plan', as: 'my_plan'
+  get 'users/my_Idea/:id' => 'users#my_plan', as: 'my_plan'
+  get 'users/my_Ability/:id' => 'users#my_ability', as: 'my_ability'
+  get 'users/my_Product/:id' => 'users#my_product', as: 'my_product'
   
   resources :users, only: [:index, :show, :edit, :update]
   resources :plans
+  resources :abilities
+  resources :products
+  resources :comments, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+
+  
 
 end

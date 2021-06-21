@@ -1,0 +1,13 @@
+<h1> Comments#index</h1>
+<div>
+  <%= @commented.title %>
+  <%= @commented.text %>
+</div>
+<div>
+  <% @comments.each do |comment| %>
+  <div>
+    <%= comment.text %>
+    <%= link_to "返信する", comment_path(comment) %>
+  </div>
+  <% end %>
+</div>
