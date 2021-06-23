@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-   before_action :autheniticate_user
+   #before_action :autheniticate_user!
    
   def index
     @plans = Plan.all

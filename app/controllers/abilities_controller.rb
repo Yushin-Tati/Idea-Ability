@@ -1,5 +1,5 @@
 class AbilitiesController < ApplicationController
-   before_action :autheniticate_user
+   #before_action :autheniticate_user!
    
   def index
     @abilities = Ability.all

@@ -1,13 +1,38 @@
 <h1>Plans#index</h1>
-<% @plans.each do |plan| %>
-  <div>
-    <%= link_to plan_path(plan) do %>
-      <%= plan.title %>
-    <% end %>
-    <%= plan.text %>
-    <%= plan.status %>
-    <%= link_to "コメント", comments_path(target_type: "Plan", target_id: plan.id) %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <%= link_to "新しいIdeaを投稿する", new_plan_path %>
+    </div>
   </div>
-<% end %>
-
-<%= link_to "新しいIdeaを投稿する", new_plan_path %>
+  <% @plans.each do |plan| %>
+    <div class="row", style="margin-bottom: 10px;">
+      <div class="col-8">
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#plan_modal-<%= plan.id %>">
+          <%= plan.title %>
+        </button>
+        <div class="modal" id="plan_modal-<%= plan.id %>" tabindex="-1" role="dialog" aria-labelledby="plan_modal-<%= plan.id %>" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="plan_modal-<%= plan.id %>"><%= plan.title %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= plan.text %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn"><%= link_to "コメント", comments_path(target_type: "Plan", target_id: plan.id) %></button>
+                <% if plan.user_id == current_user.id %>
+                  <button type="button" class="btn"><%= link_to "編集する", edit_plan_path(plan) %></button>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

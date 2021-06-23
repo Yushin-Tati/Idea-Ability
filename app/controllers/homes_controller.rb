@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-   before_action :autheniticate_user
+   #before_action :autheniticate_user!
    
   def top
   end
