@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :plans
-  has_many :comments
   has_many :abilities
   has_many :products
+  attachment :image
   acts_as_followable
   acts_as_follower
 end

@@ -5,7 +5,6 @@
     <%= plan.text %>
     <%= plan.status %>
     <%= plan.comments.count %>
-    <%= link_to "コメント", comments_path(target_type: "Plan", target_id: plan.id) %>
     <% if plan.user_id == current_user.id %>
       <%= link_to "編集する", edit_plan_path(plan) %>
       <%= link_to "削除する", plan_path(plan), method: :delete, data: {confirm: "本当に削除しますか？"} %>

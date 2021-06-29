@@ -1,0 +1,21 @@
+<div class="col-3">
+  <div class="sticky-top vh-100"">
+    <nl class="list-group list-unstyled text-center">
+      <li class="list-group-item list-group-item-action">
+        <%= link_to "My page", user_path(current_user), class: "text-dark stretched-link text-decoration-none" %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to "Idea", plans_path, class: "text-dark stretched-link text-decoration-none" %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to "Product", products_path, class: "text-dark stretched-link text-decoration-none" %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to "Ability", abilities_path, class: "text-dark stretched-link text-decoration-none" %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-dark stretched-link text-decoration-none" %>
+      </li>
+    </nl>
+  </div>
+</div>

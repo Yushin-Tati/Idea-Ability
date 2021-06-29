@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-   #before_action :autheniticate_user
-   
+
   def index
     @comments = Comment.where(:target_id == params[:target_id] && :target_type == params[:target_type])
     if params[:target_type] == "Plan"

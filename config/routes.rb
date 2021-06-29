@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :plans
   resources :abilities
   resources :products
-  resources :comments, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  #resources :comments, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
   
 

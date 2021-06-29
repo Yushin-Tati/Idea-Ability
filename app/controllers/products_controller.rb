@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-   #before_action :autheniticate_user!
-   
+  
   def index
     @products = Product.all
   end

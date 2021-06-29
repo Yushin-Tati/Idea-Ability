@@ -1,31 +1,44 @@
-<h1>Users#show</h1>
-<%= @user.name %>
-<%= @user.introduction %>
+<div class="container">
+  <div class="row">
+    <%= render 'layouts/sidemenu' %>
+    <div class="col-9">
+      <div class="text-center">
+        <%= attachment_image_tag @user, :image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle" %>
+        <p><%= @user.name %></p>
+      </div>
+      <div>
+        <%= @user.introduction %>
 
-<% if @user.id == current_user.id %>
-  <%= link_to "プロフィール編集", edit_user_path(current_user) %>
-<% end %>
-
-<div>
-  <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
+        <% if @user.id == current_user.id %>
+          <%= link_to "プロフィール編集", edit_user_path(current_user) %>
+        <% end %>
+        
+        <div>
+          <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
+        </div>
+        <div>
+          <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
+        </div>
+        <div>
+          <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
+        </div>
+        
+        
+        
+        <!-- フォロー関連 -->
+        <%= @user.follow_count %>
+        <%= link_to "フォロー", {controller: :users, action: :follow_list, user_id: @user.id} %>
+        
+        <%= @user.followers_count %>
+        <%= link_to "フォロワー", {controller: :users, action: :follower_list, user_id: @user.id} %>
+        
+        <% if current_user.id != @user.id %>
+          <%= render 'follow_form' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<div>
-  <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
-</div>
-<div>
-  <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
-</div>
 
 
-
-<!-- フォロー関連 -->
-<%= @user.follow_count %>
-<%= link_to "フォロー", {controller: :users, action: :follow_list, user_id: @user.id} %>
-
-<%= @user.followers_count %>
-<%= link_to "フォロワー", {controller: :users, action: :follower_list, user_id: @user.id} %>
-
-<% if current_user.id != @user.id %>
-  <%= render 'follow_form' %>
-<% end %>
 
