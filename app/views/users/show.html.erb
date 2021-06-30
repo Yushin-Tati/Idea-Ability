@@ -2,17 +2,71 @@
   <div class="row">
     <%= render 'layouts/sidemenu' %>
     <div class="col-9">
-      <div class="text-center">
-        <%= attachment_image_tag @user, :image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle" %>
-        <p><%= @user.name %></p>
+      <div class="text-center", style="margin-bottom: 10px;">
+        <%= attachment_image_tag @user, :image, fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto img-fluid w-25" %>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-text">
+            <p class="name">
+              <%= @user.name %>
+              <% if @user.id == current_user.id %>
+                <span class="float-right btn btn-primary">
+                  <%= link_to "プロフィール編集", edit_user_path(current_user), class: "text-white text-decoration-none" %>
+                </span>
+              <% end %>
+            </p>
+            <p class="introduction"><%= @user.introduction %></p>
+          </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#follow_list">
+            <span><%= @user.follow_count %> フォロー中</span>
+          </button>
+          <div class="modal" id="follow_list" tabindex="-1" role="dialog" aria-labelledby="follow_list" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="follow_list">フォロー中のユーザー</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% @user.all_following.each do |user| %>
+                  　<div>
+                  　  <%= user.name %> 
+                      <%= link_to '詳細', user_path(user) %>
+                  　</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#follower_list">
+            <span><%= @user.followers_count %> フォロワー</span>
+          </button>
+          <div class="modal" id="follower_list" tabindex="-1" role="dialog" aria-labelledby="follower_list" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="follower_list">フォロワー</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% @user.followers.each do |user| %>
+                  　<div>
+                      <%= user.name %>
+                      <%= link_to '詳細', user_path(user) %>
+                  　</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div>
-        <%= @user.introduction %>
-
-        <% if @user.id == current_user.id %>
-          <%= link_to "プロフィール編集", edit_user_path(current_user) %>
-        <% end %>
-        
         <div>
           <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
         </div>
@@ -22,16 +76,6 @@
         <div>
           <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
         </div>
-        
-        
-        
-        <!-- フォロー関連 -->
-        <%= @user.follow_count %>
-        <%= link_to "フォロー", {controller: :users, action: :follow_list, user_id: @user.id} %>
-        
-        <%= @user.followers_count %>
-        <%= link_to "フォロワー", {controller: :users, action: :follower_list, user_id: @user.id} %>
-        
         <% if current_user.id != @user.id %>
           <%= render 'follow_form' %>
         <% end %>
