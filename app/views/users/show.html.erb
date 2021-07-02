@@ -10,79 +10,65 @@
           <div class="card-text">
             <p class="name">
               <%= @user.name %>
+              <span>
+                <% if current_user.id != @user.id %>
+                  <%= render 'follow_form' %>
+                <% end %>
+              </span>
               <% if @user.id == current_user.id %>
                 <span class="float-right btn btn-primary">
                   <%= link_to "プロフィール編集", edit_user_path(current_user), class: "text-white text-decoration-none" %>
                 </span>
               <% end %>
             </p>
-            <p class="introduction"><%= @user.introduction %></p>
           </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#follow_list">
-            <span><%= @user.follow_count %> フォロー中</span>
-          </button>
-          <div class="modal" id="follow_list" tabindex="-1" role="dialog" aria-labelledby="follow_list" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="follow_list">フォロー中のユーザー</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <% @user.all_following.each do |user| %>
-                  　<div>
-                  　  <%= user.name %> 
-                      <%= link_to '詳細', user_path(user) %>
-                  　</div>
-                  <% end %>
-                </div>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">プロフィール</a>
+              <a class="nav-link" id="nav-follow-tab" data-toggle="tab" href="#nav-follow" role="tab" aria-controls="nav-follow" aria-selected="false"><%= @user.follow_count %> フォロー中</a>
+              <a class="nav-link" id="nav-follower-tab" data-toggle="tab" href="#nav-follower" role="tab" aria-controls="nav-follower" aria-selected="false"><%= @user.followers_count %> フォロワー</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <div>
+                <%= @user.introduction  %>
+              </div>
+              <div>
+                <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
+              </div>
+              <div>
+                <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
+              </div>
+              <div>
+                <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
               </div>
             </div>
-          </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#follower_list">
-            <span><%= @user.followers_count %> フォロワー</span>
-          </button>
-          <div class="modal" id="follower_list" tabindex="-1" role="dialog" aria-labelledby="follower_list" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="follower_list">フォロワー</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+            <div class="tab-pane fade" id="nav-follow" role="tabpanel" aria-labelledby="nav-follow-tab">
+                <% @user.all_following.each do |user| %>
+                <div style="height: 100px;">
+                  <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+                  <%= user.name %>
+                  <%= link_to '詳細', user_path(user) %>
                 </div>
-                <div class="modal-body">
-                  <% @user.followers.each do |user| %>
-                  　<div>
-                      <%= user.name %>
-                      <%= link_to '詳細', user_path(user) %>
-                  　</div>
-                  <% end %>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="nav-follower" role="tabpanel" aria-labelledby="nav-follower-tab">
+                <% @user.followers.each do |user| %>
+                <div style="height: 100px;">
+
+                  <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+                  <%= user.name %>
+                  <%= link_to '詳細', user_path(user) %>
                 </div>
-              </div>
+              <% end %>
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div>
-          <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
-        </div>
-        <div>
-          <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
-        </div>
-        <div>
-          <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
-        </div>
-        <% if current_user.id != @user.id %>
-          <%= render 'follow_form' %>
-        <% end %>
       </div>
     </div>
   </div>
 </div>
-
 
 
