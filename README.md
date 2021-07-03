@@ -30,7 +30,7 @@ https://docs.google.com/spreadsheets/d/1ObuwIhqNZ_RsP-wxxH-ALRjwLOFKSjNXE0C-n9Il
 
 ## 開発環境
 - 言語：HTML,CSS,JavaScript,Ruby
-- フレームワーク：Ruby on Rails
+- フレームワーク：Ruby on Rails, Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
 - 本番環境：AWS(EC2, RDS, EIP)
