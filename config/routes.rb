@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "homes#top"
-  get "/about" => "homes#about"
+  root to: "users#show"
   put 'users/follow/:user_id' => 'users#follow'
   put 'users/unfollow/:user_id' => 'users#unfollow'
   get 'users/my_Idea/:id' => 'users#my_plan', as: 'my_plan'
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   resources :plans
   resources :abilities
   resources :products
-  #resources :comments, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  #resources :comments
 
   
 

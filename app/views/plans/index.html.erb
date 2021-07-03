@@ -1,22 +1,18 @@
-<div class="container">
-  <div class="row">
-    <%= render 'layouts/sidemenu' %>
-    <div class="col-9">
-      <% @plans.each do |plan| %>
-        <div class="card">
-          <div class="card-header">
-            <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title"><%= plan.title %></h4>
-            <p class="card-text"><%= plan.text %></p>
-            <%= attachment_image_tag plan, :image, class: "card-image-top" %>
-          </div>
-          <div class="card-footer text-right">
-            <%= link_to "詳細", plan_path(plan), class: "btn btn-primary" %>
-          </div>
-        </div>
-      <% end %>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <% @plans.each do |plan| %>
+    <div class="card">
+      <div class="card-header">
+        <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= plan.title %>
+          <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
+        </h5>
+          <%= attachment_image_tag plan, :image, class: "card-img" %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
+

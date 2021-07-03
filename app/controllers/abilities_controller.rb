@@ -45,6 +45,6 @@ class AbilitiesController < ApplicationController
 
   private
   def plan_params
-    params.require(:ability).permit(:user_id, :title, :image_id, :text, :status)
+    params.require(:ability).permit(:user_id, :title, :image, :text, :status)
   end
 end
