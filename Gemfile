@@ -77,6 +77,7 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'dotenv-rails'
 gem 'bootstrap-honoka-rails', '~> 4.4.1'
+gem 'devise-i18n'
 
 group :production do
   gem 'mysql2'

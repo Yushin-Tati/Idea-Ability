@@ -9,4 +9,10 @@ class User < ApplicationRecord
   attachment :image
   acts_as_followable
   acts_as_follower
+  
+  with_options presence: true do
+    validates :name
+    validates :introduction
+  end
+  
 end

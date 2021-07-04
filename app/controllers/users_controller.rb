@@ -15,9 +15,11 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if user.update(user_params)
+      flash[:notice] = "プロフィールを更新しました。"
       redirect_to user_path(user.id)
     else
-      flash[:alert] = "更新に失敗しました。入力内容を再度ご確認ください"
+      flash[:alert] = "更新に失敗しました。入力内容を再度ご確認ください。"
+      @user = user
       render :edit
     end
   end
@@ -25,11 +27,11 @@ class UsersController < ApplicationController
   def my_plan
     @user = User.find(params[:id])
   end
-  
+
   def my_ability
     @user = User.find(params[:id])
   end
-  
+
   def my_product
     @user = User.find(params[:id])
   end
@@ -48,7 +50,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :introduction, :image, :telephone_number, :status,)
+    params.require(:user).permit(:name, :introduction, :image, :status,)
   end
 
 end
