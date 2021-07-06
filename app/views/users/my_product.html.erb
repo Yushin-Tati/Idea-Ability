@@ -1,12 +1,21 @@
-<h1>Users#my_product</h1>
-<% @user.products.each do |product| %>
-  <div>
-    <%= product.title %>
-    <%= product.text %>
-    <%= product.status %>
-    <% if product.user_id == current_user.id %>
-      <%= link_to "編集する", edit_product_path(product) %>
-      <%= link_to "削除する", product_path(product), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-    <% end %>
-  </div>
-<% end %>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <h2><%= @user.name %>さんProduct</h2>
+  <% @user.products.each do |product| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= product.title %>
+          <span><%= link_to "詳細", product_path(product), class: "btn btn-primary float-right" %></span>
+        </h5>
+          <%= attachment_image_tag product, :image, class: "card-img" %>
+      </div>
+      <div class="card-footer">
+        <% if product.user_id == current_user.id %>
+          <%= link_to "編集する", edit_product_path(product), class: "btn btn-success float-right" %>
+          <%= link_to "削除する", product_path(product), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

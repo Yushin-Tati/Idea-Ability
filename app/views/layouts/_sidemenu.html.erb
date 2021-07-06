@@ -1,6 +1,6 @@
 <div class="col-3">
   <div class="sticky-top vh-100">
-    <nl class="list-group list-unstyled text-center">
+    <ul class="list-group list-unstyled text-center dropright">
       <li class="list-group-item list-group-item-action">
         <%= link_to "My page", user_path(current_user), class: "text-dark stretched-link text-decoration-none" %>
       </li>
@@ -13,9 +13,17 @@
       <li class="list-group-item list-group-item-action">
         <%= link_to "Ability", abilities_path, class: "text-dark stretched-link text-decoration-none" %>
       </li>
-      <li class="list-group-item list-group-item-action">
-         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-dark stretched-link text-decoration-none" %>
+      <li class="list-group-item list-group-item-action dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="NewPost">
+        投稿する
       </li>
-    </nl>
+      <li>
+        <ul class="dropdown-menu" aria-labelledby="NewPost">
+          <li><%= link_to "Ability", new_ability_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+          <li><%= link_to "Idea", new_plan_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+          <li><%= link_to "Product", new_product_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
+

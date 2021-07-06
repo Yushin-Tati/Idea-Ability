@@ -8,7 +8,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
+
   </head>
 
   <body>
@@ -17,14 +17,21 @@
         <div class="row">
           <div class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <%= link_to "Idea&Ability", root_path, class: "navbar-brand" %>
-              <ul class="nav navbar-nav mr-auto"></ul>
-              <ul class="nav navbar-nav">
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </ul>
+              <%= link_to "Idea&Ability", user_path(current_user), class: "navbar-brand" %>
+              <div class="nav navbse-nav mr-auto"></div>
+              <% if user_signed_in? %>
+                <div class="collapse navbar-collapse justify-content-center">
+                  <div class="nav navbar-nav">
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                  </div>
+                </div>
+                <button class="btn border border-0">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "本当にログアウトしますか？"}, class: "text-dark text-decoration-none" %>
+                </button>
+              <% end %>
             </nav>
           </div>
         </div>

@@ -1,5 +1,4 @@
 class PlansController < ApplicationController
-   
   def index
     @plans = Plan.all
     @comments = Comment.where(:target_type == "plan")
@@ -46,8 +45,8 @@ class PlansController < ApplicationController
   end
 
   private
+
   def plan_params
     params.require(:plan).permit(:user_id, :title, :image, :text, :status)
   end
-
 end

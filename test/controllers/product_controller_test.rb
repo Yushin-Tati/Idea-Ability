@@ -35,5 +35,4 @@ class ProductControllerTest < ActionDispatch::IntegrationTest
     get product_dastroy_url
     assert_response :success
   end
-
 end

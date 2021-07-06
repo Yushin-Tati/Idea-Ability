@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def index
     @comments = Comment.where(:target_id == params[:target_id] && :target_type == params[:target_type])
     if params[:target_type] == "Plan"
@@ -53,6 +52,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:user_id, :target_id, :target_type, :parent_id, :text)
   end

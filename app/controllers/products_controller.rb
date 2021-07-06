@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  
   def index
     @products = Product.all
   end
@@ -30,6 +29,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
+      flash[:notice] = "更新しました"
       redirect_to my_product_path(@product.user_id)
     else
       flash[:alert] = "更新に失敗しました。入力内容を再度ご確認ください"
@@ -40,12 +40,13 @@ class ProductsController < ApplicationController
   def destroy
     product = Product.find(params[:id])
     product.destroy
+    flash[:notice] = "削除しました。"
     redirect_to my_product_path(product.user_id)
   end
 
   private
+
   def product_params
     params.require(:product).permit(:user_id, :title, :image, :text, :status)
   end
-  
 end

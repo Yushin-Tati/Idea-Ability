@@ -30,5 +30,4 @@ class CommentControllerTest < ActionDispatch::IntegrationTest
     get comment_destroy_url
     assert_response :success
   end
-
 end

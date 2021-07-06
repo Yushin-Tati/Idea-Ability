@@ -1,12 +1,21 @@
-<h1>Users#my_ability</h1>
-<% @user.abilities.each do |ability| %>
-  <div>
-    <%= ability.title %>
-    <%= ability.text %>
-    <%= ability.status %>
-    <% if ability.user_id == current_user.id %>
-      <%= link_to "編集する", edit_ability_path(ability) %>
-      <%= link_to "削除する", ability_path(ability), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-    <% end %>
-  </div>
-<% end %>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <h2><%= @user.name %>さんのAbility</h2>
+  <% @user.abilities.each do |ability| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= ability.title %>
+          <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
+        </h5>
+          <%= attachment_image_tag ability, :image, class: "card-img" %>
+      </div>
+      <div class="card-footer">
+        <% if ability.user_id == current_user.id %>
+          <%= link_to "編集する", edit_ability_path(ability), class: "btn btn-success float-right" %>
+          <%= link_to "削除する", ability_path(ability), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -35,5 +35,4 @@ class PlansControllerTest < ActionDispatch::IntegrationTest
     get plans_create_url
     assert_response :success
   end
-
 end

@@ -35,5 +35,4 @@ class AbilityControllerTest < ActionDispatch::IntegrationTest
     get ability_dastroy_url
     assert_response :success
   end
-
 end

@@ -1,5 +1,4 @@
 class AbilitiesController < ApplicationController
-   
   def index
     @abilities = Ability.all
   end
@@ -44,6 +43,7 @@ class AbilitiesController < ApplicationController
   end
 
   private
+
   def plan_params
     params.require(:ability).permit(:user_id, :title, :image, :text, :status)
   end
