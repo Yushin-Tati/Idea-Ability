@@ -1,2 +1,17 @@
-<h1>Ability#index</h1>
-<p>Find me in app/views/ability/index.html.erb</p>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <% @abilities.each do |ability| %>
+    <div class="card", style="margin-bottom: 10px;">
+      <div class="card-header bg bg-white">
+        <%= link_to ability.user.name, user_path(ability.user_id) %><span>さんのアビリティ</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= ability.title %>
+          <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
+        </h5>
+        <%= attachment_image_tag ability, :image, class: "card-img" %>
+      </div>
+    </div>
+  <% end %>
+</div>

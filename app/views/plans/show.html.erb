@@ -1,19 +1,28 @@
-<h1>Plans#show</h1>
-<div>
-  <%= link_to user_path(@plan.user.id) do %>
-    <%= @plan.user.name %>
-  <% end %>
-</div>
-<div>
-  <%= @plan.title %>
-  <%= @plan.text %>
-  <%= @plan.status %>
-  <div>
-    <%#= link_to "コメントする", new_comment_path(target_id: @plan.id, target_type: "Plan") %>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @plan.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to user_path(@plan.user_id) do %>
+      <%= @plan.user.name %>
+    <% end %><span>さんのアイデア</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white">
+      <h5 class="card-title">
+        <%= @plan.title %>
+      </h5>
+    </div>
+    <div class="card-body">
+      <%= attachment_image_tag @plan, :image, class: "card-img" %>
+      <div class="card-text">
+        <%= @plan.text %>
+      </div>
+      <% if @plan.user_id == current_user.id %>
+        <div class="card-footer bg bg-white">
+          <%= link_to "編集する", edit_plan_path(@plan), class: "btn btn-success float-right" %>
+          <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-
-<% if @plan.user_id == current_user.id %>
-  <%= link_to "編集する", edit_plan_path(@plan) %>
-  <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-<% end %>

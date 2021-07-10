@@ -1,19 +1,21 @@
 <%= render 'layouts/sidemenu' %>
 <div class="col-9">
-  <h2><%= @user.name %>さんのIdea</h2>
+  <h2><%= @user.name %>さんのアイデア</h2>
   <% @user.plans.each do |plan| %>
-    <div class="card">
+    <div class="card", style="margin-bottom: 10px;">
       <div class="card-body">
-        <h5 class="card-title">
-          <%= plan.title %>
-          <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
-        </h5>
-          <%= attachment_image_tag plan, :image, class: "card-img" %>
-      </div>
-      <div class="card-footer">
+        <div class="card-title">
+          <h5>
+            <%= plan.title %>
+            <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
+          </h5>
+        </div>
+        <%= attachment_image_tag plan, :image, class: "card-img" %>
         <% if plan.user_id == current_user.id %>
-          <%= link_to "編集する", edit_plan_path(plan), class: "btn btn-success float-right" %>
-          <%= link_to "削除する", plan_path(plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          <div class="card-footer bg bg-white">
+            <%= link_to "編集する", edit_plan_path(plan), class: "btn btn-success float-right" %>
+            <%= link_to "削除する", plan_path(plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          </div>
         <% end %>
       </div>
     </div>

@@ -11,9 +11,10 @@ class AbilitiesController < ApplicationController
     @ability = Ability.new(ability_params)
     @ability.user_id = current_user.id
     if @ability.save
+      flash[:notice] = "アビリティを投稿しました。"
       redirect_to ability_path(@ability)
     else
-      flash[:danger] = "入力内容に不備があります。入力内容を再度ご確認ください。"
+      flash[:alert] = "入力内容に不備があります。入力内容を再度ご確認ください。"
       render :new
     end
   end
@@ -29,6 +30,7 @@ class AbilitiesController < ApplicationController
   def update
     @ability = Ability.find(params[:id])
     if @ability.update(@ability)
+      flash[:notice] = "変更内容を保存しました。"
       redirect_to my_ability_path(@ability.user_id)
     else
       flash[:alert] = "更新に失敗しました。入力内容を再度ご確認ください"
@@ -39,12 +41,13 @@ class AbilitiesController < ApplicationController
   def destroy
     ability = Ability.find(params[:id])
     ability.destroy
+    flash[:notice] = "削除しました。"
     redirect_to my_ability_path(ability.user_id)
   end
 
   private
 
-  def plan_params
+  def ability_params
     params.require(:ability).permit(:user_id, :title, :image, :text, :status)
   end
 end

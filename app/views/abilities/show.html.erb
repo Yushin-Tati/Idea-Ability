@@ -1,2 +1,28 @@
-<h1>Ability#show</h1>
-<p>Find me in app/views/ability/show.html.erb</p>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @ability.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to user_path(@ability.user_id) do %>
+      <%= @ability.user.name %>
+    <% end %><span>さんのアビリティ</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white">
+      <h5 class="card-title">
+        <%= @ability.title %>
+      </h5>
+    </div>
+    <div class="card-body">
+      <%= attachment_image_tag @ability, :image, class: "card-img" %>
+      <div class="card-text">
+        <%= @ability.text %>
+      </div>
+      <% if @ability.user_id == current_user.id %>
+        <div class="card-footer bg bg-white">
+          <%= link_to "編集する", edit_ability_path(@ability), class: "btn btn-success float-right" %>
+          <%= link_to "削除する", ability_path(@ability), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -9,11 +9,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @pruduct.user_id = current_user.id
+    @product.user_id = current_user.id
     if @product.save
+      flash[:notice] = "アビリティを投稿しました。"
       redirect_to product_path(@product)
     else
-      flash[:danger] = "入力内容に不備があります。入力内容を再度ご確認ください。"
+      flash[:alert] = "入力内容に不備があります。入力内容を再度ご確認ください。"
       render :new
     end
   end
@@ -29,7 +30,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:notice] = "更新しました"
+      flash[:notice] = "変更内容を保存しました。"
       redirect_to my_product_path(@product.user_id)
     else
       flash[:alert] = "更新に失敗しました。入力内容を再度ご確認ください"

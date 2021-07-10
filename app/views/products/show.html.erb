@@ -1,2 +1,28 @@
-<h1>Product#show</h1>
-<p>Find me in app/views/product/show.html.erb</p>
+<%= render 'layouts/sidemenu' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @product.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to user_path(@product.user_id) do %>
+      <%= @plan.user.name %>
+    <% end %><span>さんのプロダクト</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white">
+      <h5 class="card-title">
+        <%= @product.title %>
+      </h5>
+    </div>
+    <div class="card-body">
+      <%= attachment_image_tag @plan, :image, class: "card-img" %>
+      <div class="card-text">
+        <%= @product.text %>
+      </div>
+      <% if @product.user_id == current_user.id %>
+        <div class="card-footer bg bg-white">
+          <%= link_to "編集する", edit_product_path(@product), class: "btn btn-success float-right" %>
+          <%= link_to "削除する", product_path(@product), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
