@@ -16,5 +16,5 @@ class User < ApplicationRecord
     validates :telephone_number
   end
 
-  validates :telephone_number, length: { is: 10 }
+  validates :telephone_number, length: { is: 11 }
 end
