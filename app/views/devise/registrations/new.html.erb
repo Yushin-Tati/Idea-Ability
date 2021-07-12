@@ -3,10 +3,10 @@
   <h2>アカウント作成</h2>
   <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
     <form>
-      <div class="form-group row">
-        <label class="col-sm-3 col-lg-2 col-form-label">アカウント名</label>
+      <div class="form-group row2 col-form-label">アカウント名</label>
         <div class="col-sm-9 col-lg-10">
-          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+          <%= f.text_field :name, au">
+        <label class="col-sm-3 col-lg-tofocus: true, class: "form-control" %>
         </div>
       </div>
       <div class="form-group row">
@@ -16,14 +16,14 @@
           <span>(ハイフンなしで入力、11桁の番号)</span>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-lg-2 col-form-label">Eメール</label>
+      <div class="form-group
+        <label class="col-sm-3 col-lg-2 col-form-label"> row">Eメール</label>
         <div class="col-sm-9 col-lg-10">
           <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-lg-2 col-form-label">パスワード</label>
+        <label class="col-sm-3 col-lg-2 col-form-label">パスワー
+      <div class="form-group row">ド</label>
         <div class="col-sm-9 col-lg-10">
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
           <% if @minimum_password_length %>
