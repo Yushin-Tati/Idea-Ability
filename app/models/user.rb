@@ -12,8 +12,9 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :name
+    validates :introduction
     validates :telephone_number
   end
 
-  validates :telephone_number, length: { is: 11 }
+  validates :telephone_number, length: { minimum: 11 }
 end
