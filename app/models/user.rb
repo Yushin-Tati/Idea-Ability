@@ -12,7 +12,6 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :introduction
     validates :telephone_number
   end
 
