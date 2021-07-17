@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_06_13_084942) do
     t.string "name", null: false
     t.string "introduction", default: "初めまして、これからよろしくお願いします。", null: false
     t.string "image_id", default: "", null: false
-    t.integer "telephone_number", null: false
+    t.string "telephone_number", null: false
     t.integer "status", default: 0, null: false
     t.boolean "is_active", default: false, null: false
     t.datetime "created_at", null: false
