@@ -3,7 +3,7 @@
   <div style="height: 100px;">
     <%= attachment_image_tag @product.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
     <%= link_to user_path(@product.user_id) do %>
-      <%= @plan.user.name %>
+      <%= @product.user.name %>
     <% end %><span>さんのプロダクト</span>
   </div>
   <div class="card">
