@@ -15,6 +15,7 @@ class User < ApplicationRecord
     validates :introduction
     validates :telephone_number
   end
-
-  validates :telephone_number, length: { minimum: 11 }
+  
+  validates :telephone_number, length: { minimum: 1 }
+  
 end

@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :introduction, null: false, default: "初めまして、これからよろしくお願いします。"
       t.string :image_id, null: false, default: ""
-      t.integer :telephone_number, null: false
+      t.string :telephone_number, null: false
       t.integer :status, null: false, default: 0
       t.boolean :is_active, null: false, default: false
 
