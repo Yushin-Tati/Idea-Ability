@@ -1,18 +1,35 @@
 <%= render 'layouts/sidemenu' %>
 <div class="col-9">
-  <% @plans.each do |plan| %>
-    <div class="card", style="margin-bottom: 10px;">
-      <div class="card-header bg bg-white">
-        <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+  <% if @q_plans %>
+    <% @q_plans.each do |plan| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= plan.title %>
+            <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <%= attachment_image_tag plan, :image, class: "card-img" %>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">
-          <%= plan.title %>
-          <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
-        </h5>
-        <%= attachment_image_tag plan, :image, class: "card-img" %>
+    <% end %>
+  <% else %>
+    <% @plans.each do |plan| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= plan.title %>
+            <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <%= attachment_image_tag plan, :image, class: "card-img" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 
