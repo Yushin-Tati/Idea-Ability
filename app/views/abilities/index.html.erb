@@ -1,17 +1,40 @@
 <%= render 'layouts/sidemenu' %>
 <div class="col-9">
-  <% @abilities.each do |ability| %>
-    <div class="card", style="margin-bottom: 10px;">
-      <div class="card-header bg bg-white">
-        <%= link_to ability.user.name, user_path(ability.user_id) %><span>さんのアビリティ</span>
+  <%= search_form_for @q do |f| %>
+    <form class="form-inline">
+      <%= f.search_field :title_or_text_cont, class: "form-control mr-1" %>
+      <%= f.submit "Search", class: "btn btn-success my-2 my-sm-0" %>
+    </form>
+  <% end %>
+  <% if @q_abilities %>
+    <% @q_abilities.each do |ability| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to ability.user.name, user_path(ability.user_id) %><span>さんのアビリティ</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= ability.title %>
+            <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <%= attachment_image_tag ability, :image, class: "card-img" %>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">
-          <%= ability.title %>
-          <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
-        </h5>
-        <%= attachment_image_tag ability, :image, class: "card-img" %>
+    <% end %>
+  <% else %>
+    <% @abilities.each do |ability| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to ability.user.name, user_path(ability.user_id) %><span>さんのアビリティ</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= ability.title %>
+            <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <%= attachment_image_tag ability, :image, class: "card-img" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

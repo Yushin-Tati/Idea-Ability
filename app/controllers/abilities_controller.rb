@@ -1,4 +1,6 @@
 class AbilitiesController < ApplicationController
+  before_action :set_search
+  
   def index
     @abilities = Ability.all
   end
@@ -29,7 +31,7 @@ class AbilitiesController < ApplicationController
 
   def update
     @ability = Ability.find(params[:id])
-    if @ability.update(@ability)
+    if @ability.update(ability_params)
       flash[:notice] = "変更内容を保存しました。"
       redirect_to my_ability_path(@ability.user_id)
     else
@@ -46,6 +48,11 @@ class AbilitiesController < ApplicationController
   end
 
   private
+  
+  def set_search
+    @q = Ability.ransack(params[:q])
+    @q_abilities = @q.result(distinct: true).page(params[:page])
+  end
 
   def ability_params
     params.require(:ability).permit(:user_id, :title, :image, :text, :status)

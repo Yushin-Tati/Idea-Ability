@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :set_search
+  
   def index
     @products = Product.all
   end
@@ -46,6 +48,11 @@ class ProductsController < ApplicationController
   end
 
   private
+  
+  def set_search
+    @q = Product.ransack(params[:q])
+    @q_products = @q.result(distinct: true).page(params[:page])
+  end
 
   def product_params
     params.require(:product).permit(:user_id, :title, :image, :text, :status)

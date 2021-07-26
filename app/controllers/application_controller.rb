@@ -2,12 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  before_action :set_search
   
-  def set_search
-    @q = Plan.ransack(params[:q])
-    @q_plans = @q.result(distinct: true).page(params[:page])
-  end
 
   def after_sign_in_path_for(resource)
     user_path(current_user.id)
