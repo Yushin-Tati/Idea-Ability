@@ -21,6 +21,7 @@
         <div class="card-footer bg bg-white">
           <%= link_to "編集する", edit_plan_path(@plan), class: "btn btn-success float-right" %>
           <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          <%= link_to "コメントする", new_comment_path, class: "btn btn-primary float-right" %>
         </div>
       <% end %>
     </div>
