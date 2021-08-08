@@ -23,7 +23,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
-    @comment = Comment.where((:target_type == "plan") && (:target_id == params[:id]))
+    @comments = Comment.where((:target_type == "Plan") && (:target_id == params[:id])).order(created_at: "DESC")
   end
 
   def edit

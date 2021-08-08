@@ -1,13 +1,3 @@
-<h1>Comment#edit</h1>
-<div class="notice"><%= flash[:alert] %></div>
-<% if @comment.errors.any? %>
-  <ui>
-    <% @comment.errors.full_messages.each do |message| %>
-      <li class="text-danger"><%= message %></li>
-    <% end %>
-  </ui>
-<% end %>
-
 <div>
   <%= form_with model: @comment, local: true do |f| %>
     <div class = "field">

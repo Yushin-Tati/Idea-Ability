@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @comments = Comment.where((:target_type == "Product") && (:target_id == params[:id])).order(created_at: "DESC")
   end
 
   def edit

@@ -21,6 +21,7 @@
         <div class="card-footer bg bg-white">
           <%= link_to "編集する", edit_product_path(@product), class: "btn btn-success float-right" %>
           <%= link_to "削除する", product_path(@product), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          <%= link_to "コメントする", new_comment_path, target_id: @product.id, target_type: "Product", class: "btn btn-primary float-right" %>
         </div>
       <% end %>
     </div>

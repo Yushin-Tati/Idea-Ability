@@ -21,6 +21,7 @@
         <div class="card-footer bg bg-white">
           <%= link_to "編集する", edit_ability_path(@ability), class: "btn btn-success float-right" %>
           <%= link_to "削除する", ability_path(@ability), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          <%= link_to "コメントする", new_comment_path, target_id: @ability.id, target_type: "Ability", class: "btn btn-primary float-right" %>
         </div>
       <% end %>
     </div>

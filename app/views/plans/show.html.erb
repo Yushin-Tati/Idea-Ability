@@ -21,9 +21,35 @@
         <div class="card-footer bg bg-white">
           <%= link_to "編集する", edit_plan_path(@plan), class: "btn btn-success float-right" %>
           <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
-          <%= link_to "コメントする", new_comment_path, class: "btn btn-primary float-right" %>
+          <%= link_to "コメントする", new_comment_path(target_id: @plan.id, target_type: "Plan"), class: "btn btn-primary float-right" %>
         </div>
       <% end %>
     </div>
   </div>
+  <div style = "margin-top: 10px;">
+    <h5>コメント</h5>
+    <% @comments.each do |comment| %>
+      <div class="card">
+        <div class="card-header bg bg-white">
+          <h6 class="card-title">
+            <%= link_to user_path(comment.user_id) do %>
+              <%= comment.user.name %>
+            <% end %>
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            <%= comment.text %>
+          </div>
+          <% if comment.user_id == current_user.id %>
+            <div class="card-footer bg bg-white">
+              <%= link_to "編集する", edit_comment_path(comment), class: "btn btn-success float-right" %>
+              <%= link_to "削除する", comment_path(comment, t: "Plan", i: comment.target_id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
