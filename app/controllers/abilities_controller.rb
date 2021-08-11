@@ -23,7 +23,7 @@ class AbilitiesController < ApplicationController
 
   def show
     @ability = Ability.find(params[:id])
-    @comments = Comment.where((:target_type == "Ability") && (:target_id == params[:id])).order(created_at: "DESC")
+    @comments = Comment.where(target_type: "Ability", target_id: params[:id]).order(created_at: "DESC")
   end
 
   def edit

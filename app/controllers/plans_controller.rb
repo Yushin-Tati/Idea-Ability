@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_search
-  
+
   def index
     @plans = Plan.all
   end
@@ -23,7 +23,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
-    @comments = Comment.where((:target_type == "Plan") && (:target_id == params[:id])).order(created_at: "DESC")
+    @comments = Comment.where(target_type: "Plan", target_id: params[:id]).order(created_at: "DESC")
   end
 
   def edit
@@ -49,7 +49,7 @@ class PlansController < ApplicationController
   end
 
   private
-  
+
   def set_search
     @q = Plan.ransack(params[:q])
     @q_plans = @q.result(distinct: true).page(params[:page])
