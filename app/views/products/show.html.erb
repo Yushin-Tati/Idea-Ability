@@ -30,14 +30,12 @@
     <h5>コメント</h5>
     <% @comments.each do |comment| %>
       <div class="card">
-        <div class="card-header bg bg-white">
+        <div class="card-body">
           <h6 class="card-title">
-            <%= link_to user_path(comment.user_id) do %>
+            <%= link_to user_path(comment.user_id), class: "text-dark" do %>
               <%= comment.user.name %>
             <% end %>
           </h6>
-        </div>
-        <div class="card-body">
           <div class="card-text">
             <%= comment.text %>
           </div>

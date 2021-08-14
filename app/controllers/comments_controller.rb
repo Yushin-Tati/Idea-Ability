@@ -1,14 +1,4 @@
 class CommentsController < ApplicationController
-  def index
-    @comments = Comment.where(:target_id == params[:target_id] && :target_type == params[:target_type])
-    if params[:target_type] == "Plan"
-      @commented = Plan.find(params[:target_id])
-    elsif params[:target_type] == "Ability"
-      @commented = Ability.find(params[:target_id])
-    elsif params[:target_type] == "Product"
-      @commented = Product.find(params[:target_id])
-    end
-  end
 
   def new
     @comment = Comment.new
@@ -32,10 +22,6 @@ class CommentsController < ApplicationController
       flash[:alert] = "入力内容に不備があります。入力内容を再度ご確認ください。"
       render :new
     end
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
   end
 
   def edit
@@ -75,6 +61,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id, :target_id, :target_type, :parent_id, :text)
+    params.require(:comment).permit(:user_id, :target_id, :target_type, :text)
   end
 end
