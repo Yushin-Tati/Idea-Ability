@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_084942) do
+ActiveRecord::Schema.define(version: 2021_08_16_140533) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2021_06_13_084942) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "favorite_type", null: false
+    t.integer "favorite_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favorite_type", "favorite_id"], name: "index_likes_on_favorite_type_and_favorite_id"
   end
 
   create_table "plans", force: :cascade do |t|
