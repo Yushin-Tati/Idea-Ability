@@ -5,22 +5,22 @@
         <%= link_to "My page", user_path(current_user), class: "text-dark stretched-link text-decoration-none" %>
       </li>
       <li class="list-group-item list-group-item-action">
-        <%= link_to "Idea", plans_path, class: "text-dark stretched-link text-decoration-none" %>
+        <%= link_to "アイデア", plans_path, class: "text-dark stretched-link text-decoration-none" %>
       </li>
       <li class="list-group-item list-group-item-action">
-        <%= link_to "Product", products_path, class: "text-dark stretched-link text-decoration-none" %>
+        <%= link_to "作品", products_path, class: "text-dark stretched-link text-decoration-none" %>
       </li>
       <li class="list-group-item list-group-item-action">
-        <%= link_to "Ability", abilities_path, class: "text-dark stretched-link text-decoration-none" %>
+        <%= link_to "アビリティ", abilities_path, class: "text-dark stretched-link text-decoration-none" %>
       </li>
       <li class="list-group-item list-group-item-action dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="NewPost">
         投稿する
       </li>
       <li>
         <ul class="dropdown-menu" aria-labelledby="NewPost">
-          <li><%= link_to "Ability", new_ability_path, class: "dropdown-item text-dark text-decoration-none" %></li>
-          <li><%= link_to "Idea", new_plan_path, class: "dropdown-item text-dark text-decoration-none" %></li>
-          <li><%= link_to "Product", new_product_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+          <li><%= link_to "アイデア", new_plan_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+          <li><%= link_to "作品", new_product_path, class: "dropdown-item text-dark text-decoration-none" %></li>
+          <li><%= link_to "アビリティ", new_ability_path, class: "dropdown-item text-dark text-decoration-none" %></li>
         </ul>
       </li>
     </ul>

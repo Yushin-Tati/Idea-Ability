@@ -5,7 +5,7 @@
       <tbody>
         <tr>
           <td>
-            <%= f.search_field :title_or_text_cont, placeholder: "プロダクトを検索", class: "form-control" %>
+            <%= f.search_field :title_or_text_cont, placeholder: "作品を検索", class: "form-control" %>
           </td>
           <td>
             <%= f.submit "Search", class: "btn btn-success" %>
@@ -18,7 +18,7 @@
     <% @q_products.each do |product| %>
       <div class="card", style="margin-bottom: 10px;">
         <div class="card-header bg bg-white">
-          <%= link_to product.user.name, user_path(product.user_id) %><span>さんのプロダクト</span>
+          <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品</span>
         </div>
         <div class="card-body">
           <h5 class="card-title">
@@ -33,7 +33,7 @@
     <% @products.each do |product| %>
       <div class="card", style="margin-bottom: 10px;">
         <div class="card-header bg bg-white">
-          <%= link_to product.user.name, user_path(product.user_id) %><span>さんのプロダクト</span>
+          <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品ト</span>
         </div>
         <div class="card-body">
           <h5 class="card-title">
