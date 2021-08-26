@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :plans
   has_many :abilities
   has_many :products
+  has_many :likes
   attachment :image
   acts_as_followable
   acts_as_follower
