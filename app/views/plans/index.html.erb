@@ -11,8 +11,8 @@
             <%= f.submit "Search", class: "btn btn-success" %>
           </td>
         </tr>
-      </tbody>   
-    </table> 
+      </tbody>
+    </table>
   <% end %>
   <% if @q_plans %>
     <% @q_plans.each do |plan| %>
@@ -26,6 +26,21 @@
             <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
           </h5>
           <%= attachment_image_tag plan, :image, class: "card-img" %>
+        </div>
+        <div class="card-footer">
+          <% if plan.liked_by?(current_user) %>
+            <p>
+              <%= link_to like_path(plan, favorite_type: "Plan", favorite_id: plan.id), method: :delete do %>
+                <span class="text-danger">♥</span><%= plan.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to likes_path(favorite_type: "Plan", favorite_id: plan.id), method: :post do %>
+                ♡<%= plan.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
         </div>
       </div>
     <% end %>
@@ -42,6 +57,7 @@
           </h5>
           <%= attachment_image_tag plan, :image, class: "card-img" %>
         </div>
+        
       </div>
     <% end %>
   <% end %>

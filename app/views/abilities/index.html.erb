@@ -27,6 +27,21 @@
           </h5>
           <%= attachment_image_tag ability, :image, class: "card-img" %>
         </div>
+        <div class="card-footer">
+          <% if ability.liked_by?(current_user) %>
+            <p>
+              <%= link_to like_path(ability, favorite_type: "Ability", favorite_id: ability.id), method: :delete do %>
+                <span class="text-danger">♥</span><%= ability.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to likes_path(favorite_type: "Ability", favorite_id: ability.id), method: :post do %>
+                ♡<%= ability.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+        </div>
       </div>
     <% end %>
   <% else %>
@@ -41,6 +56,21 @@
             <span><%= link_to "詳細", ability_path(ability), class: "btn btn-primary float-right" %></span>
           </h5>
           <%= attachment_image_tag ability, :image, class: "card-img" %>
+        </div>
+        <div class="card-footer">
+          <% if ability.liked_by?(current_user) %>
+            <p>
+              <%= link_to like_path(ability, favorite_type: "Ability", favorite_id: ability.id), method: :delete do %>
+                <span class="text-danger">♥</span><%= ability.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to likes_path(favorite_type: "Ability", favorite_id: ability.id), method: :post do %>
+                ♡<%= ability.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
         </div>
       </div>
     <% end %>
