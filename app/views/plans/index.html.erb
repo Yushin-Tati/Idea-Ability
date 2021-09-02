@@ -30,15 +30,11 @@
         <div class="card-footer">
           <% if plan.liked_by?(current_user) %>
             <p>
-              <%= link_to like_path(plan, favorite_type: "Plan", favorite_id: plan.id), method: :delete do %>
-                <span class="text-danger">♥</span><%= plan.likes.count %> いいね
-              <% end %>
+              <span class="text-danger">♥</span><%= plan.likes.count %> いいね
             </p>
             <% else %>
             <p>
-              <%= link_to likes_path(favorite_type: "Plan", favorite_id: plan.id), method: :post do %>
-                ♡<%= plan.likes.count %> いいね
-              <% end %>
+              ♡<%= plan.likes.count %> いいね
             </p>
           <% end %>
         </div>
@@ -57,7 +53,17 @@
           </h5>
           <%= attachment_image_tag plan, :image, class: "card-img" %>
         </div>
-        
+        <div class="card-footer">
+          <% if plan.liked_by?(current_user) %>
+            <p>
+              <span class="text-danger">♥</span><%= plan.likes.count %> いいね
+            </p>
+            <% else %>
+            <p>
+              ♡<%= plan.likes.count %> いいね
+            </p>
+          <% end %>
+        </div>
       </div>
     <% end %>
   <% end %>

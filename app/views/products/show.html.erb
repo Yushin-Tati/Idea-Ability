@@ -18,6 +18,19 @@
         <%= @product.text %>
       </div>
       <div class="card-footer bg bg-white">
+        <% if @product.liked_by?(current_user) %>
+          <p class="float-left">
+            <%= link_to like_path(@product, favorite_type: "Product", favorite_id: @product.id), method: :delete do %>
+              <span class="text-danger">♥</span><%= @product.likes.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p class="float-left">
+            <%= link_to likes_path(favorite_type: "Product", favorite_id: @product.id), method: :post do %>
+              ♡<%= @product.likes.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
         <% if @product.user_id == current_user.id %>
           <%= link_to "編集する", edit_product_path(@product), class: "btn btn-success float-right" %>
           <%= link_to "削除する", product_path(@product), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>

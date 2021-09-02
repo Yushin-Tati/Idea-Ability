@@ -30,15 +30,11 @@
         <div class="card-footer">
           <% if ability.liked_by?(current_user) %>
             <p>
-              <%= link_to like_path(ability, favorite_type: "Ability", favorite_id: ability.id), method: :delete do %>
-                <span class="text-danger">♥</span><%= ability.likes.count %> いいね
-              <% end %>
+              <span class="text-danger">♥</span><%= ability.likes.count %> いいね
             </p>
-            <% else %>
+          <% else %>
             <p>
-              <%= link_to likes_path(favorite_type: "Ability", favorite_id: ability.id), method: :post do %>
-                ♡<%= ability.likes.count %> いいね
-              <% end %>
+              ♡<%= ability.likes.count %> いいね
             </p>
           <% end %>
         </div>
@@ -60,15 +56,11 @@
         <div class="card-footer">
           <% if ability.liked_by?(current_user) %>
             <p>
-              <%= link_to like_path(ability, favorite_type: "Ability", favorite_id: ability.id), method: :delete do %>
-                <span class="text-danger">♥</span><%= ability.likes.count %> いいね
-              <% end %>
+              <span class="text-danger">♥</span><%= ability.likes.count %> いいね
             </p>
-            <% else %>
+          <% else %>
             <p>
-              <%= link_to likes_path(favorite_type: "Ability", favorite_id: ability.id), method: :post do %>
-                ♡<%= ability.likes.count %> いいね
-              <% end %>
+              ♡<%= ability.likes.count %> いいね
             </p>
           <% end %>
         </div>

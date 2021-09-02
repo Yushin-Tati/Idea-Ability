@@ -18,6 +18,19 @@
         <%= @ability.text %>
       </div>
       <div class="card-footer bg bg-white">
+        <% if @ability.liked_by?(current_user) %>
+          <p class="float-left">
+            <%= link_to like_path(@ability, favorite_type: "Ability", favorite_id: @ability.id), method: :delete do %>
+              <span class="text-danger">♥</span><%= @ability.likes.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p class="float-left">
+            <%= link_to likes_path(favorite_type: "Ability", favorite_id: @ability.id), method: :post do %>
+              ♡<%= @ability.likes.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
         <% if @ability.user_id == current_user.id %>
           <%= link_to "編集する", edit_ability_path(@ability), class: "btn btn-success float-right" %>
           <%= link_to "削除する", ability_path(@ability), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
