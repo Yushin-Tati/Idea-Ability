@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-
   def create
     @like = current_user.likes.new
     @like.favorite_id = params[:favorite_id]
@@ -25,5 +24,4 @@ class LikesController < ApplicationController
       redirect_to product_path(params[:favorite_id])
     end
   end
-
 end

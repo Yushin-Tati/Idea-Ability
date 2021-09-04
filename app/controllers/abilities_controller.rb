@@ -1,6 +1,6 @@
 class AbilitiesController < ApplicationController
   before_action :set_search
-  
+
   def index
     @abilities = Ability.all
   end
@@ -49,7 +49,7 @@ class AbilitiesController < ApplicationController
   end
 
   private
-  
+
   def set_search
     @q = Ability.ransack(params[:q])
     @q_abilities = @q.result(distinct: true).page(params[:page])

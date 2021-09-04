@@ -16,5 +16,4 @@ class User < ApplicationRecord
     validates :introduction
     validates :telephone_number
   end
-  
 end
