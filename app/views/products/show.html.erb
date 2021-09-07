@@ -4,7 +4,7 @@
     <%= attachment_image_tag @product.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
     <%= link_to user_path(@product.user_id) do %>
       <%= @product.user.name %>
-    <% end %><span>さんのプロダクト</span>
+    <% end %><span>さんの作品</span>
   </div>
   <div class="card">
     <div class="card-header bg bg-white">
