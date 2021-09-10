@@ -7,10 +7,16 @@
     <% end %><span>さんのアビリティ</span>
   </div>
   <div class="card">
-    <div class="card-header bg bg-white">
-      <h5 class="card-title">
+    <div class="card-header bg bg-white d-flex flex-wrap">
+      <h5 class="card-title", style="margin-right: auto;">
         <%= @ability.title %>
       </h5>
+      <span>
+        投稿日：<%= @ability.created_at.strftime('%Y/%m/%d') %>
+        <% if @ability.created_at != @ability.updated_at %>
+          、更新日：<%= @ability.updated_at.strftime('%Y/%m/%d') %>
+        <% end %>
+      </span>
     </div>
     <div class="card-body">
       <%= attachment_image_tag @ability, :image, class: "card-img" %>
@@ -48,6 +54,12 @@
             <%= link_to user_path(comment.user_id), class: "text-dark" do %>
               <%= comment.user.name %>
             <% end %>
+            <span class="float-right">
+              投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
+              <% if comment.created_at != comment.updated_at %>
+                、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
+              <% end %>
+            </span>
           </h6>
           <div class="card-text">
             <%= comment.text %>

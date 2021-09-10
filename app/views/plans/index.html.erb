@@ -19,6 +19,12 @@
       <div class="card", style="margin-bottom: 10px;">
         <div class="card-header bg bg-white">
           <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+          <span class="float-right">
+            投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
+            <% if plan.created_at != plan.updated_at %>
+              、更新日：<%= plan.updated_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </span>
         </div>
         <div class="card-body">
           <h5 class="card-title">
@@ -45,6 +51,12 @@
       <div class="card", style="margin-bottom: 10px;">
         <div class="card-header bg bg-white">
           <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
+          <span class="float-right">
+            投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
+            <% if plan.created_at != plan.updated_at %>
+              、更新日：<%= plan.updated_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </span>
         </div>
         <div class="card-body">
           <h5 class="card-title">

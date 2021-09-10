@@ -4,19 +4,25 @@
   <% @user.plans.each do |plan| %>
     <div class="card", style="margin-bottom: 10px;">
       <div class="card-body">
-        <div class="card-title">
-          <h5>
+        <div class="card-title d-flex flex-wrap">
+          <h5 style="margin-right: auto;">
             <%= plan.title %>
-            <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
           </h5>
+          <span>
+            投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
+            <% if plan.created_at != plan.updated_at %>
+              、更新日：<%= plan.updated_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </span>
         </div>
         <%= attachment_image_tag plan, :image, class: "card-img" %>
-        <% if plan.user_id == current_user.id %>
-          <div class="card-footer bg bg-white">
+        <div class="card-footer bg bg-white">
+          <span><%= link_to "詳細", plan_path(plan), class: "btn btn-primary float-right" %></span>
+          <% if plan.user_id == current_user.id %>
             <%= link_to "編集する", edit_plan_path(plan), class: "btn btn-success float-right" %>
             <%= link_to "削除する", plan_path(plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
