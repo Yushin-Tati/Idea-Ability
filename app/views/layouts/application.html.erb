@@ -27,6 +27,11 @@
                 <button class="btn border border-0">
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "本当にログアウトしますか？"}, class: "text-dark text-decoration-none" %>
                 </button>
+              <% elsif admin_signed_in? %>
+                <div class="nav navbse-nav mr-auto"></div>
+                <button class="btn border border-0">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, data: {confirm: "本当にログアウトしますか？"}, class: "text-dark text-decoration-none" %>
+                </button>
               <% end %>
             </nav>
           </div>
