@@ -1,4 +1,4 @@
-class Admins::PlansController < ApplicationController
+class Admin::AbilitiesController < ApplicationController
   before_action :authenticate_admin!
   def index
   end
