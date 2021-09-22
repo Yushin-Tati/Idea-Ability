@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_122219) do
+ActiveRecord::Schema.define(version: 2021_09_22_095931) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_122219) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_active", default: false, null: false
   end
 
   create_table "admins", force: :cascade do |t|
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_122219) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_active", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

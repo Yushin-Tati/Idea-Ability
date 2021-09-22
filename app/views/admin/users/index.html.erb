@@ -1,2 +1,67 @@
-<h1>Admins::Users#index</h1>
-<p>Find me in app/views/admins/users/index.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <h2>ユーザー一覧</h2>
+  <%= search_form_for(@q, url:admin_users_path) do |f| %>
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td>
+            <%= f.search_field :name_or_telephone_number_or_email_cont, placeholder: "ユーザーを検索", class: "form-control" %>
+          </td>
+          <td>
+            <%= f.submit "Search", class: "btn btn-success" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+  <% if @q_users %>
+    <% @q_users.each do |user| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= user.name %><span>さん</span>
+          <span class="float-right">
+            <% if user.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="telephone_number">
+            電話番号：<%= user.telephone_number %>
+            <span><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <h5 class="email">
+            メールアドレス：<%= user.email %>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <% @users.each do |user| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= user.name %><span>さん</span>
+          <span class="float-right">
+            <% if user.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●<span>
+            <% end %>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="telephone_number">
+            電話番号：<%= user.telephone_number %>
+            <span><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary float-right" %></span>
+          </h5>
+          <h5 class="email">
+            メールアドレス：<%= user.email %>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

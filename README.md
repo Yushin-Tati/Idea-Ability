@@ -37,5 +37,3 @@ https://docs.google.com/spreadsheets/d/1ObuwIhqNZ_RsP-wxxH-ALRjwLOFKSjNXE0C-n9Il
 - JSライブラリ：jQuery
 - IDE：Cloud9
 - 本番環境：AWS(EC2, RDS, EIP)
-
-## 使用素材

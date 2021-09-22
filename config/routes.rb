@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   get 'users/my_Product/:id' => 'users#my_product', as: 'my_product'
   
   namespace :admin do
-    resources :users, only: [:index, :show, :edit, :update]
-    resources :plans, only: [:index, :show, :edit, :update]
-    resources :abilities, only: [:index, :show, :edit, :update]
-    resources :products, only: [:index, :show, :edit, :update]
-    resources :comments, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :update]
+    resources :plans, only: [:index, :show, :update]
+    resources :abilities, only: [:index, :show, :update]
+    resources :products, only: [:index, :show, :update]
+    resources :comments, only: [:index, :show, :update]
   end
 
   resources :users, only: [:index, :show, :edit, :update]
