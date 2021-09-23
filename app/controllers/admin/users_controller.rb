@@ -6,12 +6,19 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.is_active == false
+      @user.is_active = true
+    else
+      @user.is_active = false
+    end
+    @user.update(user_params)
+    flash[:notice] = "ステータスを更新しました。"
+    redirect_to admin_user_path(@user.id)
   end
   
   private
@@ -21,7 +28,7 @@ class Admin::UsersController < ApplicationController
     @q_users = @q.result(distinct: true).page(params[:page])
   end
 
-  def plan_params
-    params.require(:user).permit(:is_active)
+  def user_params
+    params.permit(:is_active)
   end
 end

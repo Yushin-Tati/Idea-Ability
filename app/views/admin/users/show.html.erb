@@ -1,2 +1,81 @@
-<h1>Admins::Users#show</h1>
-<p>Find me in app/views/admins/users/show.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <div class="text-center", style="margin-bottom: 10px;">
+    <%= attachment_image_tag @user, :image, :fill, 210, 210, fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto img-fluid w-25" %>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-text">
+        <p class="name">
+          <%= @user.name %>
+          <span class="float-right btn btn-primary">
+            <%= link_to "ステータス更新", admin_user_path(@user), method: :patch, class: "text-white text-decoration-none" %>
+          </span>
+          <span style="font-size: 20px;">
+            ステータス：
+            <% if @user.is_active == false %>
+              <span class="text-success">正常</span>
+            <% else %>
+              <span class="text-danger">凍結</span>
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">プロフィール</a>
+          <a class="nav-link" id="nav-plan-tab" data-toggle="tab" href="#nav-plan" role="tab" aria-controls="nav-plan" aria-selected="false">アイデア</a>
+          <a class="nav-link" id="nav-product-tab" data-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="false">作品</a>
+          <a class="nav-link" id="nav-ability-tab" data-toggle="tab" href="#nav-ability" role="tab" aria-controls="nav-ability" aria-selected="false">アビリティ</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div>
+
+            <p><%= @user.introduction  %></p>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-plan" role="tabpanel" aria-labelledby="nav-plan-tab">
+          <div>
+            <ul>
+              <% @user.plans.each do |plan| %>
+                <li>
+                  <%= link_to admin_plan_path(plan) do %>
+                    <%= plan.title %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+          <div>
+            <ul>
+              <% @user.products.each do |product| %>
+                <li>
+                  <%= link_to admin_product_path(product) do %>
+                    <%= product.title %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-ability" role="tabpanel" aria-labelledby="nav-ability-tab">
+          <div>
+            <ul>
+              <% @user.abilities.each do |ability| %>
+                <li>
+                  <%= link_to admin_ability_path(ability) do %>
+                    <%= ability.title %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
