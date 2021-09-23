@@ -25,6 +25,14 @@
 
 ### サイトURL
 http://35.75.137.160/
+サンプルアカウント
+email:sample@sample.com
+password:sample
+
+管理者ログイン
+http://35.75.137.160/admins/sign_up
+email:admin@sample.com
+password:sample
 
 ## 設計書
 
