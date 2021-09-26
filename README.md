@@ -30,7 +30,7 @@ http://35.75.137.160/
 - email：sample@sample.com
 - password：sample
 
-### 管理者ログイン
+### 管理者ログイン(製作途中)
 http://35.75.137.160/admins/sign_in
 - email：admin@sample.com
 - password：sample
