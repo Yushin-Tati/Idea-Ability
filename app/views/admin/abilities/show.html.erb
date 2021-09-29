@@ -1,2 +1,42 @@
-<h1>Admins::Abilities#show</h1>
-<p>Find me in app/views/admins/abilities/show.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @ability.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to admin_user_path(@ability.user_id) do %>
+      <%= @ability.user.name %>
+    <% end %><span>さんのアビリティ</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white d-flex flex-wrap">
+      <h5 class="card-title", style="margin-right: auto;">
+        <%= @ability.title %>
+      </h5>
+      <span>
+        投稿日：<%= @ability.created_at.strftime('%Y/%m/%d') %>
+        <% if @ability.created_at != @ability.updated_at %>
+          、更新日：<%= @ability.updated_at.strftime('%Y/%m/%d') %>
+        <% end %>
+      </span>
+    </div>
+    <div class="card-body">
+      <%= attachment_image_tag @ability, :image, class: "card-img" %>
+      <div class="card-text">
+        <%= @ability.text %>
+      </div>
+      <div class="card-footer bg bg-white">
+        <span class="float-right btn btn-primary">
+          <%= link_to "ステータス更新", admin_ability_path(@ability), method: :patch, class: "text-white text-decoration-none" %>
+        </span>
+        ステータス：
+        <% if @ability.is_active == false %>
+          <span class="text-success">正常</span>
+        <% else %>
+          <span class="text-danger">凍結</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<!--コメントの記述追加予定-->
+
+</div>

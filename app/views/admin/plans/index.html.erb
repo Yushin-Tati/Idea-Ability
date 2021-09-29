@@ -21,7 +21,12 @@
         <div class="card-header bg bg-white">
           <%= link_to plan.user.name, admin_user_path(plan.user_id) %><span>さんのアイデア</span>
           <span class="float-right">
-            投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
+            <% if plan.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
             <% if plan.created_at != plan.updated_at %>
               、更新日：<%= plan.updated_at.strftime('%Y/%m/%d') %>
             <% end %>
@@ -42,7 +47,12 @@
         <div class="card-header bg bg-white">
           <%= link_to plan.user.name, admin_user_path(plan.user_id) %><span>さんのアイデア</span>
           <span class="float-right">
-            投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
+            <% if plan.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= plan.created_at.strftime('%Y/%m/%d') %>
             <% if plan.created_at != plan.updated_at %>
               、更新日：<%= plan.updated_at.strftime('%Y/%m/%d') %>
             <% end %>

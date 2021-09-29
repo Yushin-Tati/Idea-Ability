@@ -1,2 +1,42 @@
-<h1>Admins::Products#show</h1>
-<p>Find me in app/views/admins/products/show.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @product.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to admin_user_path(@product.user_id) do %>
+      <%= @product.user.name %>
+    <% end %><span>さんの作品</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white d-flex flex-wrap">
+      <h5 class="card-title", style="margin-right: auto;">
+        <%= @product.title %>
+      </h5>
+      <span>
+        投稿日：<%= @product.created_at.strftime('%Y/%m/%d') %>
+        <% if @product.created_at != @product.updated_at %>
+          、更新日：<%= @product.updated_at.strftime('%Y/%m/%d') %>
+        <% end %>
+      </span>
+    </div>
+    <div class="card-body">
+      <%= attachment_image_tag @product, :image, class: "card-img" %>
+      <div class="card-text">
+        <%= @product.text %>
+      </div>
+      <div class="card-footer bg bg-white">
+        <span class="float-right btn btn-primary">
+          <%= link_to "ステータス更新", admin_product_path(@product), method: :patch, class: "text-white text-decoration-none" %>
+        </span>
+        ステータス：
+        <% if @product.is_active == false %>
+          <span class="text-success">正常</span>
+        <% else %>
+          <span class="text-danger">凍結</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<!--コメントの記述追加予定-->
+
+</div>

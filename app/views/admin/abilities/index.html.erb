@@ -21,7 +21,12 @@
         <div class="card-header bg bg-white">
           <%= link_to ability.user.name, admin_user_path(ability.user_id) %><span>さんのアビリティ</span>
           <span class="float-right">
-            投稿日：<%= ability.created_at.strftime('%Y/%m/%d') %>
+            <% if ability.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= ability.created_at.strftime('%Y/%m/%d') %>
             <% if ability.created_at != ability.updated_at %>
               、更新日：<%= ability.updated_at.strftime('%Y/%m/%d') %>
             <% end %>
@@ -42,7 +47,12 @@
         <div class="card-header bg bg-white">
           <%= link_to ability.user.name, admin_user_path(ability.user_id) %><span>さんのアビリティ</span>
           <span class="float-right">
-            投稿日：<%= ability.created_at.strftime('%Y/%m/%d') %>
+            <% if ability.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= ability.created_at.strftime('%Y/%m/%d') %>
             <% if ability.created_at != ability.updated_at %>
               、更新日：<%= ability.updated_at.strftime('%Y/%m/%d') %>
             <% end %>

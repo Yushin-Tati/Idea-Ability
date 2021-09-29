@@ -7,9 +7,19 @@ class Admin::AbilitiesController < ApplicationController
   end
 
   def show
+    @ability = Ability.find(params[:id])
   end
 
   def update
+    @ability = Ability.find(params[:id])
+    if @ability.is_active == false
+      @ability.is_active = true
+    else
+      @ability.is_active = false
+    end
+    @ability.update(ability_params)
+    flash[:notice] = "ステータスを更新しました。"
+    redirect_to admin_ability_path(@ability.id)
   end
   
   private
