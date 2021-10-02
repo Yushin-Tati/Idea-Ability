@@ -1,2 +1,69 @@
-<h1>Admins::Comments#index</h1>
-<p>Find me in app/views/admins/comments/index.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <h2>コメント一覧</h2>
+  <%= search_form_for(@q, url:admin_comments_path) do |f| %>
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td>
+            <%= f.search_field :text_cont, placeholder: "アイデアを検索", class: "form-control" %>
+          </td>
+          <td>
+            <%= f.submit "Search", class: "btn btn-success" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+  <% if @q_comments %>
+    <% @q_comments.each do |comment| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to comment.user.name, admin_user_path(comment.user_id) %><span>さんのコメント</span>
+          <span class="float-right">
+            <% if comment.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
+            <% if comment.created_at != comment.updated_at %>
+              、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= comment.text %>
+            <span><%= link_to "詳細", admin_comment_path(comment), class: "btn btn-primary float-right" %></span>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <% @comments.each do |comment| %>
+      <div class="card", style="margin-bottom: 10px;">
+        <div class="card-header bg bg-white">
+          <%= link_to comment.user.name, admin_user_path(comment.user_id) %><span>さんのコメント</span>
+          <span class="float-right">
+            <% if comment.is_active == false %>
+              ステータス <span class="text-success">●</span>
+            <% else %>
+              ステータス <span class="text-danger">●</span>
+            <% end %>
+            、投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
+            <% if comment.created_at != comment.updated_at %>
+              、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= comment.text %>
+            <span><%= link_to "詳細", admin_comment_path(comment), class: "btn btn-primary float-right" %></span>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
