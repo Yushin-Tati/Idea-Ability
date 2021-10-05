@@ -1,2 +1,68 @@
-<h1>Admins::Comments#show</h1>
-<p>Find me in app/views/admins/comments/show.html.erb</p>
+<%= render 'layouts/sidemenuForAdmin' %>
+<div class="col-9">
+  <div style="height: 100px;">
+    <%= attachment_image_tag @comment.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+    <%= link_to admin_user_path(@comment.user_id) do %>
+      <%= @comment.user.name %>
+    <% end %><span>さんのコメント</span>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white d-flex flex-wrap">
+      <h5 class="card-title", style="margin-right: auto;"></h5>
+      <span>
+        投稿日：<%= @comment.created_at.strftime('%Y/%m/%d') %>
+        <% if @comment.created_at != @comment.updated_at %>
+          、更新日：<%= @comment.updated_at.strftime('%Y/%m/%d') %>
+        <% end %>
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="card-text">
+        <%= @comment.text %>
+      </div>
+      <div class="card-footer bg bg-white">
+        <span class="float-right btn btn-primary">
+          <%= link_to "ステータス更新", admin_comment_path(@comment), method: :patch, class: "text-white text-decoration-none" %>
+        </span>
+        ステータス：
+        <% if @comment.is_active == false %>
+          <span class="text-success">正常</span>
+        <% else %>
+          <span class="text-danger">凍結</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4 style="margin-top: 10px;">コメント元</h4>
+  </div>
+  <div class="card">
+    <div class="card-header bg bg-white d-flex flex-wrap">
+      <h5 class="card-title", style="margin-right: auto;">
+        <%= @comment.target.title %>
+      </h5>
+      <span>
+        投稿日：<%= @comment.created_at.strftime('%Y/%m/%d') %>
+        <% if @comment.created_at != @comment.updated_at %>
+          、更新日：<%= @comment.updated_at.strftime('%Y/%m/%d') %>
+        <% end %>
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="card-text">
+        <%= @comment.target.text %>
+      </div>
+      <div class="card-footer bg bg-white">
+        <span class="float-right btn btn-primary">
+          <% if @comment.target_type == "Plan" %>
+            <%= link_to "詳細", admin_plan_path(@comment.target_id), class: "text-white text-decoration-none" %>
+          <% elsif @comment.target_type == "Product" %>
+            <%= link_to "詳細", admin_product_path(@comment.target_id), class: "text-white text-decoration-none" %>
+          <% elsif @comment.target_type == "Ability" %>
+            <%= link_to "詳細", admin_ability_path(@comment.target_id), class: "text-white text-decoration-none" %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
