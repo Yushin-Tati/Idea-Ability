@@ -36,7 +36,35 @@
       </div>
     </div>
   </div>
-
-<!--コメントの記述追加予定-->
-
+  <div style = "margin-top: 10px;">
+    <h5>コメント</h5>
+    <% @ability.comments.each do |comment| %>
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">
+            <%= link_to admin_user_path(comment.user_id), class: "text-dark" do %>
+              <%= comment.user.name %>
+            <% end %>
+            <span class="float-right">
+              <% if comment.is_active == false %>
+                ステータス <span class="text-success">●</span>
+              <% else %>
+                ステータス <span class="text-danger">●</span>
+              <% end %>
+              、投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
+              <% if comment.created_at != comment.updated_at %>
+                、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
+              <% end %>
+            </span>
+          </h6>
+          <div class="card-text">
+            <%= comment.text %>
+          </div>
+          <div class="card-footer bg bg-white">
+            <%= link_to "詳細", admin_comment_path(comment), class: "btn btn-success float-right" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
