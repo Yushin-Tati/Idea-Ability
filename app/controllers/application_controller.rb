@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+  before_action :sign_out_user, if: :user_signed_in?
+
   def after_sign_in_path_for(resource)
     case resource
       when Admin
@@ -29,5 +30,13 @@ class ApplicationController < ActionController::Base
 
   def search_params
     params.require(:q).permit!
+  end
+
+  def sign_out_user
+    if current_user.is_active == true
+      sign_out(current_user)
+      flash[:alert] = "このアカウントはBANされました"
+      redirect_to new_user_session_path
+    end
   end
 end

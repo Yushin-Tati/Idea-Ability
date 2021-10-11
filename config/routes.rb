@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
-    registrations: 'admins/registrations'
   }
   
   devise_for :users
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   get 'users/my_Idea/:id' => 'users#my_plan', as: 'my_plan'
   get 'users/my_Ability/:id' => 'users#my_ability', as: 'my_ability'
   get 'users/my_Product/:id' => 'users#my_product', as: 'my_product'
-  
+ 
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :plans, only: [:index, :show, :update]
