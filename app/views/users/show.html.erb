@@ -1,109 +1,116 @@
 <%= render 'layouts/sidemenu' %>
 <div class="col-9">
-  <div class="text-center", style="margin-bottom: 10px;">
-    <%= attachment_image_tag @user, :image, :fill, 210, 210, fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto img-fluid w-25" %>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="card-text">
-        <p class="name">
-          <%= @user.name %>
-          <span>
-            <% if current_user.id != @user.id %>
-              <%= render 'follow_form' %>
-            <% end %>
-          </span>
-          <% if @user.id == current_user.id %>
-            <span class="float-right btn btn-primary">
-              <%= link_to "プロフィール編集", edit_user_path(current_user), class: "text-white text-decoration-none" %>
+  <% if @user.is_active == false %>
+    <div class="text-center", style="margin-bottom: 10px;">
+      <%= attachment_image_tag @user, :image, :fill, 210, 210, fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto img-fluid w-25" %>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-text">
+          <p class="name">
+            <%= @user.name %>
+            <span>
+              <% if current_user.id != @user.id %>
+                <%= render 'follow_form' %>
+              <% end %>
             </span>
-          <% end %>
-        </p>
-      </div>
-      <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">プロフィール</a>
-          <a class="nav-link" id="nav-follow-tab" data-toggle="tab" href="#nav-follow" role="tab" aria-controls="nav-follow" aria-selected="false"><%= @user.follow_count %> フォロー中</a>
-          <a class="nav-link" id="nav-follower-tab" data-toggle="tab" href="#nav-follower" role="tab" aria-controls="nav-follower" aria-selected="false"><%= @user.followers_count %> フォロワー</a>
-          <a class="nav-link" id="nav-like-tab" data-toggle="tab" href="#nav-like" role="tab" aria-controls="nav-like" aria-selected="false">いいね</a>
+            <% if @user.id == current_user.id %>
+              <span class="float-right btn btn-primary">
+                <%= link_to "プロフィール編集", edit_user_path(current_user), class: "text-white text-decoration-none" %>
+              </span>
+            <% end %>
+          </p>
         </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div>
-            <%= @user.introduction  %>
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">プロフィール</a>
+            <a class="nav-link" id="nav-follow-tab" data-toggle="tab" href="#nav-follow" role="tab" aria-controls="nav-follow" aria-selected="false"><%= @user.follow_count %> フォロー中</a>
+            <a class="nav-link" id="nav-follower-tab" data-toggle="tab" href="#nav-follower" role="tab" aria-controls="nav-follower" aria-selected="false"><%= @user.followers_count %> フォロワー</a>
+            <a class="nav-link" id="nav-like-tab" data-toggle="tab" href="#nav-like" role="tab" aria-controls="nav-like" aria-selected="false">いいね</a>
           </div>
-          <div>
-            <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
-          </div>
-          <div>
-            <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
-          </div>
-          <div>
-            <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-follow" role="tabpanel" aria-labelledby="nav-follow-tab">
-          <% @user.all_following.each do |user| %>
-            <div style="height: 100px;">
-              <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
-              <%= user.name %>
-              <%= link_to '詳細', user_path(user) %>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div>
+              <%= @user.introduction  %>
             </div>
-          <% end %>
-        </div>
-        <div class="tab-pane fade" id="nav-follower" role="tabpanel" aria-labelledby="nav-follower-tab">
-          <% @user.followers.each do |user| %>
-            <div style="height: 100px;">
-              <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
-              <%= user.name %>
-              <%= link_to '詳細', user_path(user) %>
+            <div>
+              <%= link_to "My Idea", my_plan_path(@user, id: @user.id) %>
             </div>
-          <% end %>
-        </div>
-        <div class="tab-pane fade" id="nav-like" role="tabpanel" aria-labelledby="nav-like-tab">
-          <% @user.likes.each do |like| %>
-            <div class="border-bottom">
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <% if like.favorite_type == "Plan" %>
-                      <th class="like-type w-25">
-                        アイデア
-                      </th>
-                      <td class="like-title w-75">
-                        <%= link_to plan_path(like.favorite_id), class: "flort-right" do %>
-                          <%= like.favorite.title %>
-                        <% end %>
-                      </td>
-                    <% elsif like.favorite_type == "Ability" %>
-                      <th class="like-type w-25">
-                        アビリティ
-                      </th>
-                      <td class="like-title w-75">
-                        <%= link_to ability_path(like.favorite_id), class: "flort-right" do %>
-                          <%= like.favorite.title %>
-                        <% end %>
-                      </td>
-                    <% elsif like.favorite_type == "Product" %>
-                      <th class="like-type w-25">
-                        作品
-                      </th>
-                      <td class="like-title w-75">
-                        <%= link_to product_path(like.favorite_id), class: "flort-right" do %>
-                          <%= like.favorite.title %>
-                        <% end %>
-                      </td>
-                    <% end %>
-                  </tr>
-                </tbody>
-              </table>
+            <div>
+              <%= link_to "My Ability", my_ability_path(@user, id: @user.id) %>
             </div>
-          <% end %>
+            <div>
+              <%= link_to "My Product", my_product_path(@user, id: @user.id) %>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-follow" role="tabpanel" aria-labelledby="nav-follow-tab">
+            <% @user.all_following.each do |user| %>
+              <div style="height: 100px;">
+                <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+                <%= user.name %>
+                <%= link_to '詳細', user_path(user) %>
+              </div>
+            <% end %>
+          </div>
+          <div class="tab-pane fade" id="nav-follower" role="tabpanel" aria-labelledby="nav-follower-tab">
+            <% @user.followers.each do |user| %>
+              <div style="height: 100px;">
+                <%= attachment_image_tag user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+                <%= user.name %>
+                <%= link_to '詳細', user_path(user) %>
+              </div>
+            <% end %>
+          </div>
+          <div class="tab-pane fade" id="nav-like" role="tabpanel" aria-labelledby="nav-like-tab">
+            <% @user.likes.each do |like| %>
+              <div class="border-bottom">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <% if like.favorite_type == "Plan" %>
+                        <th class="like-type w-25">
+                          アイデア
+                        </th>
+                        <td class="like-title w-75">
+                          <%= link_to plan_path(like.favorite_id), class: "flort-right" do %>
+                            <%= like.favorite.title %>
+                          <% end %>
+                        </td>
+                      <% elsif like.favorite_type == "Ability" %>
+                        <th class="like-type w-25">
+                          アビリティ
+                        </th>
+                        <td class="like-title w-75">
+                          <%= link_to ability_path(like.favorite_id), class: "flort-right" do %>
+                            <%= like.favorite.title %>
+                          <% end %>
+                        </td>
+                      <% elsif like.favorite_type == "Product" %>
+                        <th class="like-type w-25">
+                          作品
+                        </th>
+                        <td class="like-title w-75">
+                          <%= link_to product_path(like.favorite_id), class: "flort-right" do %>
+                            <%= like.favorite.title %>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="img-thumbnail text-center" alt="Thumbnail image">
+      <%= image_tag "no_image.jpg", size: "210x210" %>
+    </div>
+    <p class="text-center">このアカウントは運営によってBANされました。</p>
+  <% end %>
 </div>
 
 
