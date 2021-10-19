@@ -16,67 +16,71 @@
   <% end %>
   <% if @q_products %>
     <% @q_products.each do |product| %>
-      <div class="card", style="margin-bottom: 10px;">
-        <div class="card-header bg bg-white">
-          <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品</span>
-          <span class="float-right">
-            投稿日：<%= product.created_at.strftime('%Y/%m/%d') %>
-            <% if product.created_at != product.updated_at %>
-              、更新日：<%= product.updated_at.strftime('%Y/%m/%d') %>
+      <% if product.is_active == false %>
+        <div class="card", style="margin-bottom: 10px;">
+          <div class="card-header bg bg-white">
+            <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品</span>
+            <span class="float-right">
+              投稿日：<%= product.created_at.strftime('%Y/%m/%d') %>
+              <% if product.created_at != product.updated_at %>
+                、更新日：<%= product.updated_at.strftime('%Y/%m/%d') %>
+              <% end %>
+            </span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= product.title %>
+              <span><%= link_to "詳細", product_path(product), class: "btn btn-primary float-right" %></span>
+            </h5>
+            <%= attachment_image_tag product, :image, class: "card-img" %>
+          </div>
+          <div class="card-footer">
+            <% if product.liked_by?(current_user) %>
+              <p>
+                <span class="text-danger">♥</span><%= product.likes.count %> いいね
+              </p>
+            <% else %>
+              <p>
+                ♡<%= product.likes.count %> いいね
+              </p>
             <% end %>
-          </span>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= product.title %>
-            <span><%= link_to "詳細", product_path(product), class: "btn btn-primary float-right" %></span>
-          </h5>
-          <%= attachment_image_tag product, :image, class: "card-img" %>
-        </div>
-        <div class="card-footer">
-          <% if product.liked_by?(current_user) %>
-            <p>
-              <span class="text-danger">♥</span><%= product.likes.count %> いいね
-            </p>
-          <% else %>
-            <p>
-              ♡<%= product.likes.count %> いいね
-            </p>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   <% else %>
     <% @products.each do |product| %>
-      <div class="card", style="margin-bottom: 10px;">
-        <div class="card-header bg bg-white">
-          <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品</span>
-          <span class="float-right">
-            投稿日：<%= product.created_at.strftime('%Y/%m/%d') %>
-            <% if product.created_at != product.updated_at %>
-              、更新日：<%= product.updated_at.strftime('%Y/%m/%d') %>
+      <% if product.is_active == false %>
+        <div class="card", style="margin-bottom: 10px;">
+          <div class="card-header bg bg-white">
+            <%= link_to product.user.name, user_path(product.user_id) %><span>さんの作品</span>
+            <span class="float-right">
+              投稿日：<%= product.created_at.strftime('%Y/%m/%d') %>
+              <% if product.created_at != product.updated_at %>
+                、更新日：<%= product.updated_at.strftime('%Y/%m/%d') %>
+              <% end %>
+            </span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= product.title %>
+              <span><%= link_to "詳細", product_path(product), class: "btn btn-primary float-right" %></span>
+            </h5>
+            <%= attachment_image_tag product, :image, class: "card-img" %>
+          </div>
+          <div class="card-footer">
+            <% if product.liked_by?(current_user) %>
+              <p>
+                <span class="text-danger">♥</span><%= product.likes.count %> いいね
+              </p>
+            <% else %>
+              <p>
+                ♡<%= product.likes.count %> いいね
+              </p>
             <% end %>
-          </span>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= product.title %>
-            <span><%= link_to "詳細", product_path(product), class: "btn btn-primary float-right" %></span>
-          </h5>
-          <%= attachment_image_tag product, :image, class: "card-img" %>
-        </div>
-        <div class="card-footer">
-          <% if product.liked_by?(current_user) %>
-            <p>
-              <span class="text-danger">♥</span><%= product.likes.count %> いいね
-            </p>
-          <% else %>
-            <p>
-              ♡<%= product.likes.count %> いいね
-            </p>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

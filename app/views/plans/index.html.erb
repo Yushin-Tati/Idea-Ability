@@ -50,6 +50,7 @@
     <% end %>
   <% else %>
     <% @plans.each do |plan| %>
+      <% if plan.is_active == false %>
         <div class="card", style="margin-bottom: 10px;">
           <div class="card-header bg bg-white">
             <%= link_to plan.user.name, user_path(plan.user_id) %><span>さんのアイデア</span>
@@ -79,7 +80,7 @@
             <% end %>
           </div>
         </div>
-      <% end 
+      <% end %>
     <% end %>
   <% end %>
 </div>
