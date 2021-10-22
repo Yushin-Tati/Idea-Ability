@@ -1,78 +1,85 @@
 <%= render 'layouts/sidemenu' %>
 <div class="col-9">
-  <div style="height: 100px;">
-    <%= attachment_image_tag @plan.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
-    <%= link_to user_path(@plan.user_id) do %>
-      <%= @plan.user.name %>
-    <% end %><span>さんのアイデア</span>
-  </div>
-  <div class="card">
-    <div class="card-header bg bg-white d-flex flex-wrap">
-      <h5 class="card-title", style="margin-right: auto;">
-        <%= @plan.title %>
-      </h5>
-      <span>
-        投稿日：<%= @plan.created_at.strftime('%Y/%m/%d') %>
-        <% if @plan.created_at != @plan.updated_at %>
-          、更新日：<%= @plan.updated_at.strftime('%Y/%m/%d') %>
-        <% end %>
-      </span>
+  <% if @plan.is_active == false %>
+    <div style="height: 100px;">
+      <%= attachment_image_tag @plan.user, :image, :fill, 90, 90, fallback: "no_image.jpg", class: "rounded-circle", style: "margin: 5px 0;" %>
+      <%= link_to user_path(@plan.user_id) do %>
+        <%= @plan.user.name %>
+      <% end %><span>さんのアイデア</span>
     </div>
-    <div class="card-body">
-      <%= attachment_image_tag @plan, :image, class: "card-img" %>
-      <div class="card-text">
-        <%= @plan.text %>
-      </div>
-      <div class="card-footer bg bg-white">
-        <% if @plan.liked_by?(current_user) %>
-          <p class="float-left">
-            <%= link_to like_path(@plan, favorite_type: "Plan", favorite_id: @plan.id), method: :delete do %>
-              <span class="text-danger">♥</span><%= @plan.likes.count %> いいね
-            <% end %>
-          </p>
-          <% else %>
-          <p class="float-left">
-            <%= link_to likes_path(favorite_type: "Plan", favorite_id: @plan.id), method: :post do %>
-              ♡<%= @plan.likes.count %> いいね
-            <% end %>
-          </p>
-        <% end %>
-        <% if @plan.user_id == current_user.id %>
-          <%= link_to "編集する", edit_plan_path(@plan), class: "btn btn-success float-right" %>
-          <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
-        <% end %>
-        <%= link_to "コメントする", new_comment_path(target_id: @plan.id, target_type: "Plan"), class: "btn btn-primary float-right" %>
-      </div>
-    </div>
-  </div>
-  <div style = "margin-top: 10px;">
-    <h5>コメント</h5>
-    <% @comments.each do |comment| %>
-      <div class="card">
-        <div class="card-body">
-          <h6 class="card-title">
-            <%= link_to user_path(comment.user_id), class: "text-dark" do %>
-              <%= comment.user.name %>
-            <% end %>
-            <span class="float-right">
-              投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
-              <% if comment.created_at != comment.updated_at %>
-                、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
-              <% end %>
-            </span>
-          </h6>
-          <div class="card-text">
-            <%= comment.text %>
-          </div>
-          <% if comment.user_id == current_user.id %>
-            <div class="card-footer bg bg-white">
-              <%= link_to "編集する", edit_comment_path(comment), class: "btn btn-success float-right" %>
-              <%= link_to "削除する", comment_path(comment, t: "Plan", i: comment.target_id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
-            </div>
+    <div class="card">
+      <div class="card-header bg bg-white d-flex flex-wrap">
+        <h5 class="card-title", style="margin-right: auto;">
+          <%= @plan.title %>
+        </h5>
+        <span>
+          投稿日：<%= @plan.created_at.strftime('%Y/%m/%d') %>
+          <% if @plan.created_at != @plan.updated_at %>
+            、更新日：<%= @plan.updated_at.strftime('%Y/%m/%d') %>
           <% end %>
+        </span>
+      </div>
+      <div class="card-body">
+        <%= attachment_image_tag @plan, :image, class: "card-img" %>
+        <div class="card-text">
+          <%= @plan.text %>
+        </div>
+        <div class="card-footer bg bg-white">
+          <% if @plan.liked_by?(current_user) %>
+            <p class="float-left">
+              <%= link_to like_path(@plan, favorite_type: "Plan", favorite_id: @plan.id), method: :delete do %>
+                <span class="text-danger">♥</span><%= @plan.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p class="float-left">
+              <%= link_to likes_path(favorite_type: "Plan", favorite_id: @plan.id), method: :post do %>
+                ♡<%= @plan.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+          <% if @plan.user_id == current_user.id %>
+            <%= link_to "編集する", edit_plan_path(@plan), class: "btn btn-success float-right" %>
+            <%= link_to "削除する", plan_path(@plan), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+          <% end %>
+          <%= link_to "コメントする", new_comment_path(target_id: @plan.id, target_type: "Plan"), class: "btn btn-primary float-right" %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+    <div style = "margin-top: 10px;">
+      <h5>コメント</h5>
+      <% @comments.each do |comment| %>
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">
+              <%= link_to user_path(comment.user_id), class: "text-dark" do %>
+                <%= comment.user.name %>
+              <% end %>
+              <span class="float-right">
+                投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %>
+                <% if comment.created_at != comment.updated_at %>
+                  、更新日：<%= comment.updated_at.strftime('%Y/%m/%d') %>
+                <% end %>
+              </span>
+            </h6>
+            <div class="card-text">
+              <%= comment.text %>
+            </div>
+            <% if comment.user_id == current_user.id %>
+              <div class="card-footer bg bg-white">
+                <%= link_to "編集する", edit_comment_path(comment), class: "btn btn-success float-right" %>
+                <%= link_to "削除する", comment_path(comment, t: "Plan", i: comment.target_id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger float-right" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="img-thumbnail text-center" alt="Thumbnail image">
+      <%= image_tag "no_image.jpg", size: "210x210" %>
+    </div>
+    <p class="text-center">この投稿は運営によってBANされました。</p>
+  <% end %>
 </div>
 
